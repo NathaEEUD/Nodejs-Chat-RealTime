@@ -1,0 +1,24 @@
+{
+  "name": "nodejs-chat-realtime",
+  "version": "1.0.0",
+  "description": "A simple chat application in Node.js using Express.js, Socket.io and Mongoose",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NathaEEUD/Nodejs-Chat-RealTime.git"
+  },
+  "keywords": [
+    "Node",
+    "Chat",
+    "Application"
+  ],
+  "author": "Nathaly",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NathaEEUD/Nodejs-Chat-RealTime/issues"
+  },
+  "homepage": "https://github.com/NathaEEUD/Nodejs-Chat-RealTime#readme"
+}
