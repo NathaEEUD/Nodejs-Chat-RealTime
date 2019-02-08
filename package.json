@@ -4,7 +4,8 @@
   "description": "A simple chat application in Node.js using Express.js, Socket.io and Mongoose",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon ./server.js"
   },
   "repository": {
     "type": "git",
@@ -20,5 +21,11 @@
   "bugs": {
     "url": "https://github.com/NathaEEUD/Nodejs-Chat-RealTime/issues"
   },
-  "homepage": "https://github.com/NathaEEUD/Nodejs-Chat-RealTime#readme"
+  "homepage": "https://github.com/NathaEEUD/Nodejs-Chat-RealTime#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
 }
