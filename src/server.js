@@ -1,7 +1,8 @@
 const path = require('path');
 const express = require('express');
+const bodyParser = require('body-parser');
 
-// const mongo =  require('./libs/db-connection');
+const mongo = require('./libs/db-connection');
 const modelDB = require('./model/message');
 
 const app = express();
@@ -10,8 +11,11 @@ const app = express();
 app.set('port', process.env.PORT || 3000);
 app.use(express.static(path.join(__dirname, 'views')));
 
+// middlewares
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+
 async function initDB() {
-    // const db = await mongo.connect();
     const db = await modelDB();
     if (db) initServer();
 }
