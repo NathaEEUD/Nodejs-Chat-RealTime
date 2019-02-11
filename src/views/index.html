@@ -15,7 +15,7 @@
             <br>
             <input type="text" id="name" class="form-control" placeholder="Name">
             <br>
-            <textarea id="Message" class="form-control" placeholder="Your Message Here" cols="30" rows="10"></textarea>
+            <textarea id="message" class="form-control" placeholder="Your Message Here" cols="30" rows="10"></textarea>
             <br>
             <button id="send" class="btn btn-success">Send</button>
         </div>
@@ -24,7 +24,32 @@
         </div>
     </div>
     <script>
-    
+        $(() => {
+            $("#send").click(() => {
+                sendMessage({
+                    name: $("#name").val(),
+                    textMessage: $("#message").val()
+                })
+                getMessages();
+            })
+        })
+
+        function addMessages(message) {
+            $("#messages").append(`
+                <h4> ${message.name} </h4>
+                <p> ${message.textMessage} </p>
+            `)
+        }
+
+        function getMessages() {
+            $.get(`http://localhost:3000/messages`, data => {
+                data.forEach(addMessages);
+            })
+        }
+
+        function sendMessage(message) {
+            $.post(`http://localhost:3000/messages`, message);
+        }
     </script>
 </body>
 </html>

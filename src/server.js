@@ -3,20 +3,25 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const mongo = require('./libs/db-connection');
-const modelDB = require('./model/message');
+const indexRoutes = require('./routes/index');
 
 const app = express();
 
 // settings
 app.set('port', process.env.PORT || 3000);
-app.use(express.static(path.join(__dirname, 'views')));
+app.set('views', path.join(__dirname, 'views'));
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
 
 // middlewares
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
+// routes
+app.use('/', indexRoutes);
+
 async function initDB() {
-    const db = await modelDB();
+    const db = await mongo.connect();
     if (db) initServer();
 }
 
