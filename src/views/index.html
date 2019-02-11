@@ -7,6 +7,7 @@
     <title>Node.js Chat App</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
 </head>
 <body>
     <div class="container">
@@ -24,6 +25,8 @@
         </div>
     </div>
     <script>
+        let socket = io();
+
         $(() => {
             $("#send").click(() => {
                 sendMessage({
@@ -50,6 +53,8 @@
         function sendMessage(message) {
             $.post(`http://localhost:3000/messages`, message);
         }
+
+        socket.on('message', addMessages);
     </script>
 </body>
 </html>

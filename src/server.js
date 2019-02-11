@@ -1,4 +1,5 @@
 const path = require('path');
+
 const express = require('express');
 const bodyParser = require('body-parser');
 
@@ -6,6 +7,9 @@ const mongo = require('./libs/db-connection');
 const indexRoutes = require('./routes/index');
 
 const app = express();
+
+const serverHTTP = require('http').Server(app);
+const io = require('socket.io')(serverHTTP);
 
 // settings
 app.set('port', process.env.PORT || 3000);
@@ -20,13 +24,18 @@ app.use(bodyParser.urlencoded({extended: false}));
 // routes
 app.use('/', indexRoutes);
 
+// socket
+io.on('connection', () => {
+    console.info('A user is connected!');
+})
+
 async function initDB() {
     const db = await mongo.connect();
     if (db) initServer();
 }
 
 function initServer() {
-    const server = app.listen(app.get('port'), () => {
+    const server = serverHTTP.listen(app.get('port'), () => {
         console.info(`Server is running on port`, server.address().port);
     })
     process.on('SIGINT', closeApp);
